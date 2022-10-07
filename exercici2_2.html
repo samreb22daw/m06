@@ -1,0 +1,97 @@
+<!-- ***********************
+    Samuel Rebollo Rodriguez
+    04/10/2022
+    m06uf1ex2_exercici2.2
+************************ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ca">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>Càlcul de temperatures mitjanes</title>
+	</head>
+	<body>
+		<h1>daw2_rebollo_samuel_m06uf1ex2</h1>    
+		<p><b><u>APLICACIÓ PEL CÀLCUL DE TEMPERATURES MITJANES</u></b></p>
+		<b>a) Introudeix les dades de temperatura en ºC:<br></b>
+		<table>
+			<tbody>
+				<tr>
+					<td>Mostra de Temperatura 1:</td>
+					<td><input type="text" name="temp[]" size="5" maxlength="6" value=0></td>
+					<td>Mostra de Temperatura 2:</td>
+					<td><input type="text" name="temp[]" size="5" maxlength="6" value=0></td>
+				</tr>
+				 <tr>
+					<td>Mostra de Temperatura 3:</td>
+					<td><input type="text" name="temp[]" size="5" maxlength="6" value=0></td>
+					<td>Mostra de Temperatura 4:</td>
+					<td><input type="text" name="temp[]" size="5" maxlength="6" value=0></td>
+				 </tr>
+				 <tr>
+					<td>Mostra de Temperatura 5:</td>
+					<td><input type="text" name="temp[]" size="5" maxlength="6" value=0></td>
+					<td>Mostra de Temperatura 6:</td>
+					<td><input type="text" name="temp[]" size="5" maxlength="6" value=0></td>
+				 </tr>
+				 <tr>
+					<td>Mostra de Temperatura 7:</td>
+					<td><input type="text" name="temp[]" size="5" maxlength="6" value=0></td>
+					<td>Mostra de Temperatura 8:</td>
+					<td><input type="text" name="temp[]" size="5" maxlength="6" value=0></td>
+				 </tr>
+			</tbody>
+		</table>	
+		<br>
+        <b>b) Escull les unitats de temperatura del resultat:</b><br>
+        <input name="ut[]" value="celsius" type="checkbox" checked>Graus Celsius (ºC)<br>
+        <input name="ut[]" value="fahrenheit" type="checkbox">Graus Fahrenheit (ºF)<br>
+        <input name="ut[]" value="kelvins" type="checkbox">Kelvins (K)<br>
+        <br>        
+        <button onclick='fCalcula()'>Calcula mitjanes</button>
+		<button onclick='fNeteja()'>Neteja dades</button>
+		<p><b>RESULTATS:</b></p>
+		<p id="resultats"></p>
+		<button onclick='fReinicia()'>Neteja resultats</button>
+		<script>
+			function fCalcula() {
+                document.getElementById('resultats').innerHTML = ` `;
+                let temperatures = document.getElementsByName('temp[]');
+                let grausCheckbox = document.getElementsByName('ut[]');
+                let mitjanaCelsius = 0;
+                let mitjanaFahrenheit = 0;
+                let mitjanaKelvins = 0;
+                for (let i = 0; i < temperatures.length; i++){
+                    mitjanaCelsius += parseFloat(temperatures[i].value);
+                }
+                mitjanaCelsius /= temperatures.length;
+
+                for (let y = 0; y < grausCheckbox.length; y++){
+                    if (grausCheckbox[y].checked){
+                        if (grausCheckbox[y].value == "celsius"){
+                            document.getElementById('resultats').innerHTML += `Temperatura mitjana en graus Celsius (ºC): ${mitjanaCelsius.toFixed(1)}.<br>`;
+                        }
+                        if (grausCheckbox[y].value == "fahrenheit"){
+                            mitjanaFahrenheit = ((9 * mitjanaCelsius) / 5) + 32;
+                            document.getElementById('resultats').innerHTML += `Temperatura mitjana en graus Fahrenheit (ºF): ${mitjanaFahrenheit.toFixed(1)}.<br>`;
+                        }
+                        if (grausCheckbox[y].value == "kelvins"){
+                            mitjanaKelvins = 273 + mitjanaCelsius;
+                            document.getElementById('resultats').innerHTML += `Temperatura mitjana en graus Kelvin (K): ${mitjanaKelvins.toFixed(1)}.<br>`;
+                        }
+                    }
+                }
+			}
+			
+			function fNeteja() {
+				let temperatures = document.getElementsByName('temp[]');
+				for (let i = 0; temperatures.length; i++){
+					temperatures[i].value = 0;
+				}				 
+			}
+						
+			function fReinicia() {
+				document.getElementById('resultats').innerHTML = ` `;
+			}
+		</script>   
+	</body>
+</html>
